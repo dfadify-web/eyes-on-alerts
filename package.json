@@ -1,0 +1,29 @@
+{
+  "name": "eyes-on-alerts",
+  "version": "0.1.0",
+  "description": "Eyes on Claude extension: Get alerted when Claude finishes, needs your permission, a tool fails or runs too long: browser notification, sound, and push to your phone with ntfy.",
+  "license": "MIT",
+  "author": "dfadify-web",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfadify-web/eyes-on-alerts.git"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "eyes-on-claude",
+    "extension"
+  ],
+  "bin": {
+    "eyes-on-alerts": "install.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/smoke.js",
+    "install-ext": "node install.js",
+    "uninstall-ext": "node install.js --uninstall"
+  }
+}
