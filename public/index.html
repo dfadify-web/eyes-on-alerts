@@ -100,7 +100,7 @@ document.getElementById('hPush').insertAdjacentText('afterbegin', T('push'));
 document.getElementById('hFeed').insertAdjacentText('afterbegin', T('feed'));
 
 const post = (u, b) => fetch(u, { method: 'POST', body: b ? JSON.stringify(b) : undefined }).then((r) => r.json());
-async function save(patch) { const r = await post('/api/config', patch); S.config = r.config; renderConfig(); }
+async function save(patch) { const r = await post('api/config', patch); S.config = r.config; renderConfig(); }
 
 function renderConfig() {
   const c = S.config; if (!c) return;
@@ -118,8 +118,8 @@ function renderConfig() {
 document.getElementById('topic').onchange = (e) => save({ ntfy: { topic: e.target.value.trim().replace(/[^\w-]/g, '') } });
 document.getElementById('server').onchange = (e) => save({ ntfy: { server: e.target.value.trim() || 'https://ntfy.sh' } });
 document.getElementById('newTopic').onclick = () => save({ ntfy: { topic: 'eyes-on-claude-' + crypto.getRandomValues(new Uint8Array(6)).reduce((a, b) => a + b.toString(16).padStart(2, '0'), '') } });
-document.getElementById('test').onclick = () => post('/api/test');
-document.getElementById('clear').onclick = async () => { await post('/api/clear'); S.alerts = []; renderFeed(); };
+document.getElementById('test').onclick = () => post('api/test');
+document.getElementById('clear').onclick = async () => { await post('api/clear'); S.alerts = []; renderFeed(); };
 
 const RICON = Object.fromEntries(RULES.map(([k, i, c]) => [k, [i, c]])); RICON.test = ['bell', 'var(--x)'];
 function renderFeed() {
@@ -145,8 +145,8 @@ function notifBtn() {
 function soundBtn() { const b = document.getElementById('soundBtn'); b.innerHTML = `${icon(S.sound ? 'play' : 'pause')} ${T(S.sound ? 'sound' : 'soundOff')}`; b.classList.toggle('on', S.sound); b.onclick = () => { S.sound = !S.sound; store.set('eoc.alerts.sound', S.sound ? '1' : '0'); soundBtn(); if (S.sound) chime('turnDone'); }; }
 notifBtn(); soundBtn();
 
-fetch('/api/state').then((r) => r.json()).then((s) => { S.config = s.config; S.alerts = s.alerts; renderConfig(); renderFeed(); });
-const es = new EventSource('/api/stream');
+fetch('api/state').then((r) => r.json()).then((s) => { S.config = s.config; S.alerts = s.alerts; renderConfig(); renderFeed(); });
+const es = new EventSource('api/stream');
 es.onmessage = (m) => {
   const d = JSON.parse(m.data);
   if (d.type === 'alert') {

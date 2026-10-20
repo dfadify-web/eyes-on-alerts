@@ -51,7 +51,7 @@
     let es;
     const set = (ok, txt) => { if (pill) { pill.className = `pill ${ok ? 'ok' : 'bad'}`; pill.innerHTML = `<i></i>${txt}`; } };
     const open = () => {
-      es = new EventSource('/api/events');
+      es = new EventSource('api/events');
       es.onopen = () => set(true, LANG === 'es' ? 'en directo' : 'live');
       es.onerror = () => { set(false, LANG === 'es' ? 'esperando a Eyes on Claude…' : 'waiting for Eyes on Claude…'); };
       es.onmessage = (m) => {

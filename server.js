@@ -47,7 +47,7 @@ const server = http.createServer(async (req, res) => {
       r.pipe(res);
     });
     up.on('error', () => { res.writeHead(502, { 'Content-Type': 'text/plain' }); res.end('Eyes on Claude is not running'); });
-    req.on('close', () => up.destroy());
+    res.on('close', () => up.destroy());
     return;
   }
   if (plugin?.handle && p.startsWith('/api/')) { if (await plugin.handle(req, res, url)) return; }

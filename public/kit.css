@@ -19,6 +19,7 @@
 }
 * { box-sizing: border-box; }
 html, body { height: 100%; margin: 0; }
+@media (max-width: 700px) { html, body { overflow-x: hidden; } .wrap { padding: 10px; } .top { padding: 8px 10px; } .big { font-size: 34px; } }
 body { background: var(--bg); color: var(--text); font: 14px/1.5 Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; position: relative; isolation: isolate; }
 body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background: radial-gradient(55% 40% at 10% -5%, color-mix(in srgb, var(--x) 16%, transparent), transparent 70%), radial-gradient(40% 30% at 100% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%); }
